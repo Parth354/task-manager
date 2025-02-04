@@ -4,6 +4,8 @@ import TaskEditModal from "./TaskEditModal";
 import { deleteTask, toggleTaskCompletion } from "@/app/actions/taskActions";
 import { getTasks } from "@/app/actions/taskActions";  // Importing the getTasks function
 
+export const dynamic = 'force-dynamic'
+
 export default function TaskList({ tasks: initialTasks }: { tasks: any[] }) {
   const [tasks, setTasks] = useState(initialTasks);
   const [editingTask, setEditingTask] = useState<any | null>(null);

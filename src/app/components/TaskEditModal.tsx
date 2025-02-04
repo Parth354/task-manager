@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { updateTask } from "@/app/actions/taskActions";
 
+export const dynamic = 'force-dynamic'
+
 export default function TaskEditModal({
   task,
   onClose,

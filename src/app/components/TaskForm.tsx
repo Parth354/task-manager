@@ -3,6 +3,8 @@
 import { useState, useTransition } from "react";
 import { createTask } from "@/app/actions/taskActions";
 
+export const dynamic = 'force-dynamic'
+
 export default function TaskForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
