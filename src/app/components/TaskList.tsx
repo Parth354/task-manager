@@ -1,15 +1,22 @@
-"use client";
+'use client';
 import { useState } from "react";
 import TaskEditModal from "./TaskEditModal";
-import { deleteTask, toggleTaskCompletion} from "@/app/actions/taskActions";
+import { deleteTask, toggleTaskCompletion } from "@/app/actions/taskActions";
+import { getTasks } from "@/app/actions/taskActions";  // Importing the getTasks function
 
 export default function TaskList({ tasks: initialTasks }: { tasks: any[] }) {
   const [tasks, setTasks] = useState(initialTasks);
   const [editingTask, setEditingTask] = useState<any | null>(null);
 
+  const refreshTasks = async () => {
+    const updatedTasks = await getTasks();
+    setTasks(updatedTasks);
+  };
+
   const handleDelete = async (taskId: string) => {
     setTasks((prev) => prev.filter((task) => task._id !== taskId));
     await deleteTask(taskId);
+    refreshTasks();
   };
 
   const handleCheckboxChange = async (taskId: string, currentCompleted: boolean) => {
@@ -18,7 +25,8 @@ export default function TaskList({ tasks: initialTasks }: { tasks: any[] }) {
         task._id === taskId ? { ...task, completed: !currentCompleted } : task
       )
     );
-    await toggleTaskCompletion(taskId,!currentCompleted);
+    await toggleTaskCompletion(taskId, !currentCompleted);
+    refreshTasks();
   };
 
   return (
@@ -36,9 +44,7 @@ export default function TaskList({ tasks: initialTasks }: { tasks: any[] }) {
                     className="cursor-pointer"
                   />
                   <span
-                    className={`text-lg ${
-                      task.completed ? "line-through text-gray-500" : ""
-                    }`}
+                    className={`text-lg ${task.completed ? "line-through text-gray-500" : ""}`}
                   >
                     {task.title}
                   </span>

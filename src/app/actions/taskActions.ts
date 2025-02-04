@@ -57,6 +57,13 @@ export async function deleteTask(id: string) {
     if (!deletedTask) {
       throw new Error("Task not found");
     }
+    return {
+      _id: deletedTask._id.toString(),
+      title: deletedTask.title,
+      description: deletedTask.description,
+      dueDate: deletedTask.dueDate,
+      completed: deletedTask.completed
+    };
   } catch (error) {
     console.error("Error deleting task:", error);
     throw new Error("Error deleting task");
