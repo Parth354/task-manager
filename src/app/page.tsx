@@ -2,6 +2,8 @@ import { getTasks } from "../app/actions/taskActions";
 import TaskForm from "../app/components/TaskForm";  
 import TaskList from "../app/components/TaskList";  
 
+export const dynamic = 'force-dynamic'
+
 export default async function TasksPage() {
   const tasks = await getTasks(); 
 

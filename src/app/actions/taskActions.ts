@@ -2,6 +2,8 @@
 import Task from '@/models/tasks';
 import dbConnect from '@/lib/database';
 
+export const dynamic = 'force-dynamic'
+
 export async function createTask(title: string, description: string, dueDate?: String) {
   try {
     await dbConnect();
